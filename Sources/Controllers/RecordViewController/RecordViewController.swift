@@ -14,6 +14,7 @@ class RecordViewController: BaseViewController, NSCollectionViewDelegateFlowLayo
     @IBOutlet private weak var arrowIndicatorContainer: NSView!
 
     var record: Record!
+    var relatedRecords = [Record]()
     private var selectedRecords = Set<Record>()
     private var highlightedRecordForTouch = [Touch: Record]()
 
@@ -65,7 +66,7 @@ class RecordViewController: BaseViewController, NSCollectionViewDelegateFlowLayo
     private func setupCollectionView() {
         collectionView.register(InfoCollectionItemView.self, forItemWithIdentifier: InfoCollectionItemView.identifier)
         collectionView.register(RecordCollectionItemView.self, forItemWithIdentifier: RecordCollectionItemView.identifier)
-        load(record.relatedRecords)
+        load(related: record.relatedRecords(sorted: true))
     }
 
     private func setupGestures() {
@@ -177,7 +178,7 @@ class RecordViewController: BaseViewController, NSCollectionViewDelegateFlowLayo
     // MARK: NSCollectionViewDelegate & NSCollectionViewDataSource
 
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return record.relatedRecords.count + 1
+        return record.relatedRecords(sorted: true).count + 1
     }
 
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
@@ -189,7 +190,7 @@ class RecordViewController: BaseViewController, NSCollectionViewDelegateFlowLayo
             }
         default:
             if let collectionItemView = collectionView.makeItem(withIdentifier: RecordCollectionItemView.identifier, for: indexPath) as? RecordCollectionItemView {
-                let relatedRecord = record.relatedRecords[indexPath.item - 1]
+                let relatedRecord = record.relatedRecords(sorted: true)[indexPath.item - 1]
                 collectionItemView.record = relatedRecord
                 collectionItemView.tintColor = record.type.color
                 let highlightedRecords = Set(highlightedRecordForTouch.values)
@@ -218,7 +219,8 @@ class RecordViewController: BaseViewController, NSCollectionViewDelegateFlowLayo
 
     // MARK: Helpers
 
-    private func load(_ records: [Record]) {
+    private func load(related records: [Record]) {
+        relatedRecords = records
         collectionView.reloadData()
         collectionView.performBatchUpdates(nil) { [weak self] finished in
             if let strongSelf = self, finished {

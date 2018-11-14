@@ -14,15 +14,6 @@ class Record: Hashable {
     var coordinate: CLLocationCoordinate2D?
     var relatedRecordsForType = [RecordType: Set<Record>]()
 
-    var relatedRecords: [Record] {
-        return relatedRecordsForType.values.reduce([], +).sorted { lhs, rhs in
-            if lhs.type.sortOrder == rhs.type.sortOrder {
-                return lhs.id < rhs.id
-            }
-            return lhs.type.sortOrder < rhs.type.sortOrder
-        }
-    }
-
     var hashValue: Int {
         return id.hashValue ^ type.hashValue
     }
@@ -30,7 +21,7 @@ class Record: Hashable {
 
     // MARK: Init
 
-    init(type: RecordType, id: Int, title: String, description: String, dates: DateRange?, coordinate: CLLocationCoordinate2D?) {
+    init(type: RecordType, id: Int, title: String, description: String, dates: DateRange? = nil, coordinate: CLLocationCoordinate2D? = nil) {
         self.type = type
         self.id = id
         self.title = title
@@ -47,6 +38,21 @@ class Record: Hashable {
             relatedRecordsForType[record.type] = siblings.union([record])
         } else {
             relatedRecordsForType[record.type] = [record]
+        }
+    }
+
+    func relatedRecords(sorted: Bool = false) -> [Record] {
+        let relatedRecords = relatedRecordsForType.values.reduce([], +)
+
+        guard sorted else {
+            return relatedRecords
+        }
+
+        return relatedRecords.sorted { lhs, rhs in
+            if lhs.type.sortOrder == rhs.type.sortOrder {
+                return lhs.id < rhs.id
+            }
+            return lhs.type.sortOrder < rhs.type.sortOrder
         }
     }
 

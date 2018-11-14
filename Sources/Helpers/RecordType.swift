@@ -5,12 +5,15 @@ import AppKit
 
 
 enum RecordType: String, CaseIterable {
+    case province
     case city
     case event
     case individual
 
     var color: NSColor {
         switch self {
+        case .province:
+            return style.provinceColor
         case .city:
             return style.schoolColor
         case .event:
@@ -22,17 +25,21 @@ enum RecordType: String, CaseIterable {
 
     var sortOrder: Int {
         switch self {
-        case .city:
+        case .province:
             return 1
-        case .event:
+        case .city:
             return 2
-        case .individual:
+        case .event:
             return 3
+        case .individual:
+            return 4
         }
     }
 
     var placeholder: NSImage {
         switch self {
+        case .province:
+            return NSImage(named: "province-icon")!
         case .city:
             return NSImage(named: "city-icon")!
         case .event:

@@ -53,7 +53,7 @@ class RecordMovementComponent: GKComponent {
             // If node drifts off screen with expected velocity, update node with new y position
             let y = isDrifting ? CGFloat.random(in: radius ... scene.frame.height - radius) : entity.position.y
             entity.set(position: CGPoint(x: -entity.node.size.width * 2, y: y))
-            let dx = CGFloat.random(in: style.themeDxRange)
+            let dx = CGFloat.random(in: style.provinceDxRange)
             entity.set(state: .drift(dx: dx))
         }
         if entity.position.y < -radius {

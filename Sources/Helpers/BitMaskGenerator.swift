@@ -24,8 +24,7 @@ final class BitMaskGenerator {
                     return levelMask << inset(for: cluster)
                 }
             }
-            // TODO
-            return entity.record.type == .city ? Constants.backgroundBitMask : .min
+            return entity.record.type == .province ? Constants.backgroundBitMask : .min
         default:
             return .min
         }

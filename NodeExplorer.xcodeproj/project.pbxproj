@@ -39,6 +39,7 @@
 		22905B24219CAFCD00FFEE89 /* RecordPhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22905B1F219CAFC000FFEE89 /* RecordPhysicsComponent.swift */; };
 		22905B25219CAFCF00FFEE89 /* RecordRenderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22905B1E219CAFC000FFEE89 /* RecordRenderComponent.swift */; };
 		22905B28219CB45000FFEE89 /* Node.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22905B27219CB45000FFEE89 /* Node.storyboard */; };
+		22905B2A219CCDBB00FFEE89 /* Province.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22905B29219CCDBB00FFEE89 /* Province.swift */; };
 		2290A03520E2E4BE00F028C4 /* FlippedCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290A03420E2E4BE00F028C4 /* FlippedCollectionView.swift */; };
 		2290A04620E4439C00F028C4 /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290A04520E4439C00F028C4 /* NSColor.swift */; };
 		22A49873204749700024B46C /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49872204749700024B46C /* JSON.swift */; };
@@ -123,6 +124,7 @@
 		22905B20219CAFC000FFEE89 /* RecordMovementComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMovementComponent.swift; sourceTree = "<group>"; };
 		22905B21219CAFC000FFEE89 /* LayerRenderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerRenderComponent.swift; sourceTree = "<group>"; };
 		22905B27219CB45000FFEE89 /* Node.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Node.storyboard; sourceTree = "<group>"; };
+		22905B29219CCDBB00FFEE89 /* Province.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Province.swift; sourceTree = "<group>"; };
 		2290A03420E2E4BE00F028C4 /* FlippedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlippedCollectionView.swift; sourceTree = "<group>"; };
 		2290A04520E4439C00F028C4 /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		22A49872204749700024B46C /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 			children = (
 				222694BF20699B10007DA6FA /* Record.swift */,
 				22A9C619219B5BCC00A2C524 /* City.swift */,
+				22905B29219CCDBB00FFEE89 /* Province.swift */,
 			);
 			path = Records;
 			sourceTree = "<group>";
@@ -688,6 +691,7 @@
 				2276AE68204E75C2001FAD8B /* BorderlessWindow.swift in Sources */,
 				22A9C611219B4E6B00A2C524 /* RecordCollectionItemView.swift in Sources */,
 				22A9C61A219B5BCC00A2C524 /* City.swift in Sources */,
+				22905B2A219CCDBB00FFEE89 /* Province.swift in Sources */,
 				A44F1B6520FEAF8B005FEFD1 /* RecordDate.swift in Sources */,
 				22290C382028FA35000E0573 /* MapKit.swift in Sources */,
 				22FCD425219CAAB90010F800 /* Environment.swift in Sources */,

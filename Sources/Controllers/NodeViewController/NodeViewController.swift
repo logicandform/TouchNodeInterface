@@ -37,7 +37,6 @@ class NodeViewController: NSViewController, NodeGestureResponder {
 
         if !initialized {
             initialized = true
-            setupEntities()
             setupMainScene()
         }
     }
@@ -48,11 +47,6 @@ class NodeViewController: NSViewController, NodeGestureResponder {
     private func setupView() {
         mainView.showsFPS = true
         mainView.showsNodeCount = true
-    }
-
-    private func setupEntities() {
-        // TODO
-//        RecordManager.instance.createEntities()
     }
 
 

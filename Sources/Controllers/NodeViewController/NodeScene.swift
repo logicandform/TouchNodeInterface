@@ -33,7 +33,7 @@ class NodeScene: SKScene, SKPhysicsContactDelegate {
 
         setupSystemGestures()
         setupPhysics()
-        setupThemes()
+        setupProvinces()
         setupEntities()
     }
 
@@ -108,16 +108,15 @@ class NodeScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
     }
 
-    private func setupThemes() {
+    private func setupProvinces() {
         guard let scene = scene else {
             return
         }
 
-        // TODO
-        let provinces = EntityManager.instance.entities(of: .city)
+        let provinces = EntityManager.instance.entities(of: .province)
 
         for province in provinces {
-            let dx = CGFloat.random(in: style.themeDxRange)
+            let dx = CGFloat.random(in: style.provinceDxRange)
             let x = CGFloat.random(in: 0 ... scene.frame.width)
             let y = CGFloat.random(in: 0 ... scene.frame.height)
             province.set(state: .drift(dx: dx))
@@ -132,7 +131,7 @@ class NodeScene: SKScene, SKPhysicsContactDelegate {
 
     private func setupEntities() {
         var entityTypes = Set(RecordType.allCases)
-        entityTypes.remove(.city)
+        entityTypes.remove(.province)
         let entities = entityTypes.reduce([]) { $0 + EntityManager.instance.entities(of: $1) }
         let spacing = frame.width / CGFloat(entities.count / 2)
         let nodeRadius = style.defaultNodeSize.width / 2
@@ -247,10 +246,8 @@ class NodeScene: SKScene, SKPhysicsContactDelegate {
                 EntityManager.instance.release(entity)
             }
         } else {
-            // Only release provinces then they are closed from a cluster
-            // TODO
-            if entity.record.type == .city {
-                let dx = CGFloat.random(in: style.themeDxRange)
+            if entity.record.type == .province {
+                let dx = CGFloat.random(in: style.provinceDxRange)
                 entity.set(state: .drift(dx: dx))
             } else {
                 EntityManager.instance.release(entity)
@@ -415,7 +412,10 @@ class NodeScene: SKScene, SKPhysicsContactDelegate {
             return
         }
 
-        let positionInScreen = position + CGPoint(x: window.frame.minX, y: -Constants.windowDisplayOffset)
-        WindowManager.instance.display(.record(record), at: positionInScreen)
+        let windowType = WindowType.record(record)
+        let originX = location.x - windowType.size.width / 2
+        let originY = max(style.windowMargins, location.y - windowType.size.height - Constants.windowDisplayOffset)
+        let positionInScreen = window.frame.origin + CGPoint(x: originX, y: originY)
+        WindowManager.instance.display(windowType, at: positionInScreen)
     }
 }

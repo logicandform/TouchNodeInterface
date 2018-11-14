@@ -61,9 +61,8 @@ final class EntityManager {
         if entities.count > 1 {
             entity.set(state: .remove)
         } else {
-            // TODO: make province entity
-            if entity.record.type == .city {
-                let dx = CGFloat.random(in: style.themeDxRange)
+            if entity.record.type == .province {
+                let dx = CGFloat.random(in: style.provinceDxRange)
                 entity.set(state: .drift(dx: dx))
             } else {
                 entity.set(state: .reset)
@@ -158,7 +157,7 @@ final class EntityManager {
             let proxy = shuffled[index]
             if let entityForProxy = getEntity(for: proxy) {
                 // TODO make province
-                if proxy.type == .city {
+                if proxy.type == .province {
                     let copy = createCopy(of: entityForProxy, level: level)
                     copy.cluster = cluster
                     result.insert(copy)
