@@ -87,7 +87,7 @@ class RecordNode: SKSpriteNode {
 
     private func addTitleNode(for record: Record) {
         titleNode = SKLabelNode()
-        titleNode.text = title(for: record)
+        titleNode.text = record.title
         titleNode.numberOfLines = 3
         titleNode.lineBreakMode = .byClipping
         titleNode.preferredMaxLayoutWidth = frame.width - Constants.textInsetMargin
@@ -121,15 +121,5 @@ class RecordNode: SKSpriteNode {
         closeNode.position = CGPoint(x: 0, y: Constants.buttonOffset)
         closeNode.alpha = 0
         addChild(closeNode)
-    }
-
-    private func title(for record: Record) -> String {
-        let words = record.shortestTitle().split(separator: " ")
-        let firstSix = words.prefix(Constants.wordsPerTitle)
-        let title = firstSix.joined(separator: " ")
-        if words.count > Constants.wordsPerTitle {
-            return title.appending(" ...")
-        }
-        return title
     }
 }

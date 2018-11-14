@@ -18,7 +18,7 @@ final class NodeCluster: NSObject {
     private(set) var selectedEntity: RecordEntity
     private(set) var entitiesForLevel = EntityLevels()
     private(set) var layerForLevel = [Int: ClusterLayer]()
-    private unowned var scene: MainScene
+    private unowned var scene: NodeScene
     private weak var closeTimer: Foundation.Timer?
 
     var isDragging: Bool {
@@ -33,13 +33,12 @@ final class NodeCluster: NSObject {
 
     // MARK: Init
 
-    init(id: Int, scene: MainScene, entity: RecordEntity) {
+    init(id: Int, scene: NodeScene, entity: RecordEntity) {
         self.id = id
         self.scene = scene
         self.selectedEntity = entity
         self.center = selectedEntity.position
         super.init()
-        self.resetCloseTimer()
     }
 
 
@@ -54,7 +53,6 @@ final class NodeCluster: NSObject {
 
     /// Updates the layers in the cluster for the selected entity and updates the levels for all current entities
     func select(_ entity: RecordEntity) {
-        resetCloseTimer()
         attach(to: entity)
         setLayers(toLevel: entitiesForLevel.count - 1)
         updateStatesForEntities()
@@ -66,7 +64,6 @@ final class NodeCluster: NSObject {
             closeTimer?.invalidate()
             setLayers(toLevel: 0)
         } else {
-            resetCloseTimer()
             removeLayer(level: 0)
             setLayers(toLevel: entitiesForLevel.count - 1)
         }
@@ -163,13 +160,6 @@ final class NodeCluster: NSObject {
             return style.levelFourNodeSize
         default:
             return style.defaultNodeSize
-        }
-    }
-
-    func resetCloseTimer() {
-        closeTimer?.invalidate()
-        closeTimer = Timer.scheduledTimer(withTimeInterval: Configuration.clusterTimeoutDuration, repeats: false) { [weak self] _ in
-            self?.closeTimerFired()
         }
     }
 

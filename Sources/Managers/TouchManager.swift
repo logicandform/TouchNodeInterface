@@ -8,7 +8,7 @@ import MacGestures
 final class TouchManager: SocketManagerDelegate {
     static let instance = TouchManager()
 
-    var timelineGestureManager: GestureManager?
+    var nodeGestureManager: NodeGestureManager?
     private var socketManager: SocketManager?
     private var managersForTouch = [Touch: (NSWindow, GestureManager)]()
     private var touchesForAppID = [Int: Set<Touch>]()
@@ -42,7 +42,7 @@ final class TouchManager: SocketManagerDelegate {
         if let manager = manager(of: touch) {
             manager.handle(touch)
         } else {
-            timelineGestureManager?.handle(touch)
+            nodeGestureManager?.handle(touch)
         }
     }
 

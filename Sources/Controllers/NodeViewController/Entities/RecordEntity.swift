@@ -8,7 +8,7 @@ final class RecordEntity: GKEntity {
 
     let record: Record
     let relatedRecordsForLevel: RelatedLevels
-    let relatedRecords: Set<RecordProxy>
+    let relatedRecords: Set<Record>
     var hasCollidedWithLayer = false
     var initialPosition: CGPoint?
     var cluster: NodeCluster?
@@ -71,7 +71,7 @@ final class RecordEntity: GKEntity {
     init(record: Record, levels: RelatedLevels) {
         self.record = record
         self.relatedRecordsForLevel = levels
-        var relatedRecords = Set<RecordProxy>()
+        var relatedRecords = Set<Record>()
         for level in levels {
             relatedRecords.formUnion(level)
         }

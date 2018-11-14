@@ -5,13 +5,11 @@ import GameplayKit
 import MacGestures
 
 
-class MainScene: SKScene, SKPhysicsContactDelegate {
+class NodeScene: SKScene, SKPhysicsContactDelegate {
 
     var gestureManager: NodeGestureManager!
     private var clusterForID = [Int: NodeCluster]()
     private var selectedEntity: RecordEntity?
-    private var handlerForApp = [Int: NodeHandler]()
-    private var appForNode = [RecordNode: Int]()
 
     private struct Constants {
         static let windowDisplayOffset: CGFloat = 30
@@ -33,7 +31,6 @@ class MainScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
 
-        setupHandlers()
         setupSystemGestures()
         setupPhysics()
         setupThemes()
@@ -94,13 +91,6 @@ class MainScene: SKScene, SKPhysicsContactDelegate {
 
     // MARK: Setup
 
-    private func setupHandlers() {
-        let max = Configuration.numberOfScreens * Configuration.appsPerScreen
-        for app in 0 ..< max {
-            handlerForApp[app] = NodeHandler(appID: app)
-        }
-    }
-
     private func setupSystemGestures() {
         guard let view = view else {
             return
@@ -123,15 +113,16 @@ class MainScene: SKScene, SKPhysicsContactDelegate {
             return
         }
 
-        let themes = EntityManager.instance.entities(of: .theme)
+        // TODO
+        let provinces = EntityManager.instance.entities(of: .city)
 
-        for theme in themes {
+        for province in provinces {
             let dx = CGFloat.random(in: style.themeDxRange)
             let x = CGFloat.random(in: 0 ... scene.frame.width)
             let y = CGFloat.random(in: 0 ... scene.frame.height)
-            theme.set(state: .drift(dx: dx))
+            province.set(state: .drift(dx: dx))
 
-            if let recordNode = theme.component(ofType: RecordRenderComponent.self)?.recordNode {
+            if let recordNode = province.component(ofType: RecordRenderComponent.self)?.recordNode {
                 recordNode.position = CGPoint(x: x, y: y)
                 addChild(recordNode)
                 addGestures(to: recordNode)
@@ -140,8 +131,8 @@ class MainScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func setupEntities() {
-        var entityTypes = Set(RecordType.allValues)
-        entityTypes.remove(.theme)
+        var entityTypes = Set(RecordType.allCases)
+        entityTypes.remove(.city)
         let entities = entityTypes.reduce([]) { $0 + EntityManager.instance.entities(of: $1) }
         let spacing = frame.width / CGFloat(entities.count / 2)
         let nodeRadius = style.defaultNodeSize.width / 2
@@ -189,18 +180,11 @@ class MainScene: SKScene, SKPhysicsContactDelegate {
 
         switch pan.state {
         case .recognized:
-            if let location = pan.lastLocation, appForNode[node] == nil {
-                let app = calculateApp(xPosition: location.x)
-                appForNode[node] = app
-                handlerForApp[app]?.startActivity()
-            }
             entity.set(state: .dragging)
             entity.dragVelocity = pan.delta
             entity.set(position: position)
             if entity.isSelected {
                 entity.cluster?.set(position: position)
-            } else {
-                entity.cluster?.resetCloseTimer()
             }
         case .momentum:
             let positionInScene = contained(position: position, in: scene, for: entity)
@@ -211,11 +195,6 @@ class MainScene: SKScene, SKPhysicsContactDelegate {
             }
         case .ended:
             entity.dragVelocity = nil
-            if let app = appForNode[node] {
-                handlerForApp[app]?.endActivity()
-                handlerForApp[app]?.endUpdates()
-                appForNode.removeValue(forKey: node)
-            }
         case .possible, .failed:
             finishDrag(for: entity)
         default:
@@ -268,8 +247,9 @@ class MainScene: SKScene, SKPhysicsContactDelegate {
                 EntityManager.instance.release(entity)
             }
         } else {
-            // Only release themes then they are closed from a cluster
-            if entity.record.type == .theme {
+            // Only release provinces then they are closed from a cluster
+            // TODO
+            if entity.record.type == .city {
                 let dx = CGFloat.random(in: style.themeDxRange)
                 entity.set(state: .drift(dx: dx))
             } else {
@@ -360,7 +340,7 @@ class MainScene: SKScene, SKPhysicsContactDelegate {
 
     /// Sets up all the data relationships for the tapped node and starts the physics interactions
     private func select(_ node: RecordNode, at position: CGPoint) {
-        guard let entity = node.entity as? RecordEntity, entity.state.tappable, let window = view?.window else {
+        guard let entity = node.entity as? RecordEntity, entity.state.tappable else {
             return
         }
 
@@ -379,9 +359,7 @@ class MainScene: SKScene, SKPhysicsContactDelegate {
             // Only allow actions once the node is aligned with its cluster
             if aligned(entity, with: cluster) {
                 if node.openButton(contains: position) {
-                    let positionInApplication = position + CGPoint(x: window.frame.minX, y: -Constants.windowDisplayOffset)
-                    let app = calculateApp(xPosition: position.x)
-                    postRecordNotification(app: app, type: entity.record.type, id: entity.record.id, at: positionInApplication)
+                    displayWindow(for: node.record, at: position)
                 } else if node.closeButton(contains: position) {
                     remove(cluster: cluster)
                 }
@@ -432,13 +410,12 @@ class MainScene: SKScene, SKPhysicsContactDelegate {
         return entityX == clusterX && entityY == clusterY
     }
 
-    private func postRecordNotification(app: Int, type: RecordType, id: Int, at position: CGPoint) {
-        let info: JSON = [Keys.app: app, Keys.id: id, Keys.position: position.toJSON(), Keys.type: type.rawValue]
-        DistributedNotificationCenter.default().postNotificationName(RecordNotification.display.name, object: nil, userInfo: info, deliverImmediately: true)
-    }
+    private func displayWindow(for record: Record, at location: CGPoint) {
+        guard let window = view?.window else {
+            return
+        }
 
-    private func calculateApp(xPosition: CGFloat) -> Int {
-        let appWidth = frame.width / CGFloat(Configuration.numberOfScreens) / CGFloat(Configuration.appsPerScreen) + 1
-        return Int(xPosition / appWidth)
+        let positionInScreen = position + CGPoint(x: window.frame.minX, y: -Constants.windowDisplayOffset)
+        WindowManager.instance.display(.record(record), at: positionInScreen)
     }
 }

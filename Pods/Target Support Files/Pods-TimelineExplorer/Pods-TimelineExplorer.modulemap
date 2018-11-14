@@ -1,6 +1,0 @@
-framework module Pods_TimelineExplorer {
-  umbrella header "Pods-TimelineExplorer-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -44,7 +44,7 @@ final class Style {
     let menuWindowLevel = NSWindow.Level(32)
     let touchIndicatorWindowLevel = NSWindow.Level(33)
 
-    
+
     // MARK: Windows Properties
 
     let recordWindowSize = CGSize(width: 416, height: 650)

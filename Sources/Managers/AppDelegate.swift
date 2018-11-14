@@ -27,9 +27,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func setupApplication() {
         let screen = NSScreen.at(position: Configuration.touchScreenPosition)
-        let timelineController = TimelineViewController.instance()
-        let timelineWindow = BorderlessWindow(frame: screen.frame, controller: timelineController, level: style.mapWindowLevel)
-        timelineWindow.setFrame(screen.frame, display: true)
-        timelineWindow.makeKeyAndOrderFront(self)
+        let nodeController = NodeViewController.instance()
+        let nodeWindow = BorderlessWindow(frame: screen.frame, controller: nodeController, level: style.nodeWindowLevel)
+        nodeWindow.setFrame(screen.frame, display: true)
+        nodeWindow.makeKeyAndOrderFront(self)
     }
 }

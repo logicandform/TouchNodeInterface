@@ -3,6 +3,9 @@
 import Foundation
 
 
+typealias RelatedLevels = [Set<Record>]
+
+
 final class RecordManager {
     static let instance = RecordManager()
 

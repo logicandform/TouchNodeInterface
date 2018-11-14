@@ -10,10 +10,10 @@ final class EntityManager {
     static let instance = EntityManager()
 
     /// The scene that record nodes are added to
-    var scene: MainScene!
+    var scene: NodeScene!
 
-    /// Set of all entities for type and proxy
-    private(set) var entitiesForType: [RecordType: [RecordProxy: [RecordEntity]]] = [:]
+    /// Set of all entities for type and id
+    private(set) var entitiesForType: [RecordType: [Int: [RecordEntity]]] = [:]
 
     /// List of all GKComponentSystems. The systems will be updated in order. The order is defined to match assumptions made within components.
     private lazy var componentSystems: [GKComponentSystem] = {
@@ -32,7 +32,7 @@ final class EntityManager {
 
     /// Use singleton
     private init() {
-        for type in RecordType.allValues {
+        for type in RecordType.allCases {
             entitiesForType[type] = [:]
         }
     }
@@ -48,20 +48,21 @@ final class EntityManager {
     }
 
     func entities(of type: RecordType) -> [RecordEntity] {
-        let entitiesForProxy = entitiesForType[type] ?? [:]
-        return entitiesForProxy.reduce([]) { $0 + $1.value }
+        let entities = entitiesForType[type] ?? [:]
+        return entities.reduce([]) { $0 + $1.value }
     }
 
     /// If entity is a duplicate it will be removed from the scene, else resets entity.
     func release(_ entity: RecordEntity) {
-        guard let entities = entitiesForType[entity.record.type]?[entity.record.proxy] else {
+        guard let entities = entitiesForType[entity.record.type]?[entity.record.id] else {
             return
         }
 
         if entities.count > 1 {
             entity.set(state: .remove)
         } else {
-            if entity.record.type == .theme {
+            // TODO: make province entity
+            if entity.record.type == .city {
                 let dx = CGFloat.random(in: style.themeDxRange)
                 entity.set(state: .drift(dx: dx))
             } else {
@@ -72,14 +73,14 @@ final class EntityManager {
 
     /// Removes an entity from the scene and local cache
     func remove(_ entity: RecordEntity) {
-        guard entity.state == .remove, let entities = entitiesForType[entity.record.type]?[entity.record.proxy] else {
+        guard entity.state == .remove, let entities = entitiesForType[entity.record.type]?[entity.record.id] else {
             fatalError("Entity should be marked for removal. Call")
         }
 
         if let index = entities.index(where: { $0 === entity }) {
             removeComponents(from: entity)
             entity.node.removeFromParent()
-            entitiesForType[entity.record.type]?[entity.record.proxy]?.remove(at: index)
+            entitiesForType[entity.record.type]?[entity.record.id]?.remove(at: index)
             scene.gestureManager.remove(entity.node)
         }
     }
@@ -95,8 +96,9 @@ final class EntityManager {
 
             // Request the remaining entities up to to allowed size per level
             let remainingSpace = Constants.maxEntitiesPerLevel - entitiesForLevel.count
-            let requestedProxies = records.subtracting(proxies(for: entitiesForLevel))
-            let requestedEntities = requestEntities(from: requestedProxies, size: remainingSpace, for: cluster, level: level)
+            let currentRecords = Set(entitiesForLevel.map { $0.record })
+            let requestedRecords = records.subtracting(currentRecords)
+            let requestedEntities = requestEntities(from: requestedRecords, size: remainingSpace, for: cluster, level: level)
             entitiesForLevel.formUnion(requestedEntities)
 
             // Don't insert empty levels
@@ -110,8 +112,8 @@ final class EntityManager {
     }
 
     /// Returns a subset of the given entities that exist in the set of proxies up to size
-    private func entities(for proxies: Set<RecordProxy>, from entities: Set<RecordEntity>, size: Int) -> Set<RecordEntity> {
-        let filtered = entities.filter { proxies.contains($0.record.proxy) }
+    private func entities(for records: Set<Record>, from entities: Set<RecordEntity>, size: Int) -> Set<RecordEntity> {
+        let filtered = entities.filter { records.contains($0.record) }
         var result = Set<RecordEntity>()
         for (index, entity) in filtered.enumerated() {
             if index < size {
@@ -147,15 +149,16 @@ final class EntityManager {
     // MARK: Helpers
 
     /// Returns a random subset of entities associated with the given proxies up to a given size, entities in another cluster will be duplicated.
-    private func requestEntities(from proxies: Set<RecordProxy>, size: Int, for cluster: NodeCluster, level: Int) -> Set<RecordEntity> {
-        let shuffled = proxies.shuffled()
+    private func requestEntities(from records: Set<Record>, size: Int, for cluster: NodeCluster, level: Int) -> Set<RecordEntity> {
+        let shuffled = records.shuffled()
         let max = min(size, shuffled.count)
         var result = Set<RecordEntity>()
 
         for index in (0 ..< max) {
             let proxy = shuffled[index]
             if let entityForProxy = getEntity(for: proxy) {
-                if proxy.type == .theme {
+                // TODO make province
+                if proxy.type == .city {
                     let copy = createCopy(of: entityForProxy, level: level)
                     copy.cluster = cluster
                     result.insert(copy)
@@ -173,17 +176,16 @@ final class EntityManager {
     }
 
     private func store(_ entity: RecordEntity) {
-        let proxy = entity.record.proxy
-        if entitiesForType[entity.record.type]?[proxy] == nil {
-            entitiesForType[entity.record.type]?[proxy] = [entity]
+        if entitiesForType[entity.record.type]?[entity.record.id] == nil {
+            entitiesForType[entity.record.type]?[entity.record.id] = [entity]
         } else {
-            entitiesForType[entity.record.type]?[proxy]!.append(entity)
+            entitiesForType[entity.record.type]?[entity.record.id]!.append(entity)
         }
     }
 
     /// Returns entity for given record, prioritizing records that are not already clustered
-    private func getEntity(for proxy: RecordProxy) -> RecordEntity? {
-        guard let entities = entitiesForType[proxy.type]?[proxy] else {
+    private func getEntity(for record: Record) -> RecordEntity? {
+        guard let entities = entitiesForType[record.type]?[record.id] else {
             return nil
         }
 
@@ -208,10 +210,5 @@ final class EntityManager {
 
     private func flatten(_ levels: EntityLevels) -> Set<RecordEntity> {
         return levels.reduce(Set<RecordEntity>()) { return $0.union($1) }
-    }
-
-    private func proxies(for entities: Set<RecordEntity>) -> Set<RecordProxy> {
-        let proxies = entities.map { $0.record.proxy }
-        return Set(proxies)
     }
 }

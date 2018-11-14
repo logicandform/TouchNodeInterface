@@ -28,6 +28,17 @@
 		226A451C214F23B500860F0E /* RecordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A451B214F23B500860F0E /* RecordManager.swift */; };
 		226A4524214F342200860F0E /* TouchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226A4523214F342200860F0E /* TouchScreen.swift */; };
 		2276AE68204E75C2001FAD8B /* BorderlessWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2276AE67204E75C2001FAD8B /* BorderlessWindow.swift */; };
+		22905B17219CAE5F00FFEE89 /* RecordEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FCD41D219CAA7B0010F800 /* RecordEntity.swift */; };
+		22905B18219CAE6300FFEE89 /* ClusterLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FCD41C219CAA7B0010F800 /* ClusterLayer.swift */; };
+		22905B19219CAE6600FFEE89 /* ClusterLayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FCD42E219CAAD90010F800 /* ClusterLayerNode.swift */; };
+		22905B1A219CAE6900FFEE89 /* RecordNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FCD42D219CAAD90010F800 /* RecordNode.swift */; };
+		22905B1B219CAE6D00FFEE89 /* NodeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FCD41A219CAA600010F800 /* NodeScene.swift */; };
+		22905B1C219CAE7000FFEE89 /* NodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FCD419219CAA500010F800 /* NodeViewController.swift */; };
+		22905B22219CAFC700FFEE89 /* LayerRenderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22905B21219CAFC000FFEE89 /* LayerRenderComponent.swift */; };
+		22905B23219CAFCA00FFEE89 /* RecordMovementComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22905B20219CAFC000FFEE89 /* RecordMovementComponent.swift */; };
+		22905B24219CAFCD00FFEE89 /* RecordPhysicsComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22905B1F219CAFC000FFEE89 /* RecordPhysicsComponent.swift */; };
+		22905B25219CAFCF00FFEE89 /* RecordRenderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22905B1E219CAFC000FFEE89 /* RecordRenderComponent.swift */; };
+		22905B28219CB45000FFEE89 /* Node.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22905B27219CB45000FFEE89 /* Node.storyboard */; };
 		2290A03520E2E4BE00F028C4 /* FlippedCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290A03420E2E4BE00F028C4 /* FlippedCollectionView.swift */; };
 		2290A04620E4439C00F028C4 /* NSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290A04520E4439C00F028C4 /* NSColor.swift */; };
 		22A49873204749700024B46C /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A49872204749700024B46C /* JSON.swift */; };
@@ -60,8 +71,8 @@
 		22FCD428219CAAB90010F800 /* NodeCluster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FCD422219CAAB80010F800 /* NodeCluster.swift */; };
 		22FCD429219CAAB90010F800 /* AnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FCD423219CAAB80010F800 /* AnimationType.swift */; };
 		22FCD42B219CAAC70010F800 /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FCD42A219CAAC70010F800 /* EntityManager.swift */; };
+		39C1E07C9CED5AA7B6C10099 /* Pods_NodeExplorer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CD4648F988BC8250230E344 /* Pods_NodeExplorer.framework */; };
 		3F2FAB5D204F7D9E002EDF5D /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2FAB5C204F7D9E002EDF5D /* Collection.swift */; };
-		69F8459B2D7EBA05D5054E24 /* Pods_TimelineExplorer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCD4BC304E6BE947ABB8966 /* Pods_TimelineExplorer.framework */; };
 		8F22945620773EA600731E78 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F22945520773EA600731E78 /* Math.swift */; };
 		8FB48D6D2128E1D7009980B1 /* MapAnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB48D6C2128E1D7009980B1 /* MapAnimationType.swift */; };
 		A44A56EE2135F35200F73D55 /* TimelineSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A56ED2135F35200F73D55 /* TimelineSelection.swift */; };
@@ -107,6 +118,11 @@
 		226A451B214F23B500860F0E /* RecordManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordManager.swift; sourceTree = "<group>"; };
 		226A4523214F342200860F0E /* TouchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchScreen.swift; sourceTree = "<group>"; };
 		2276AE67204E75C2001FAD8B /* BorderlessWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderlessWindow.swift; sourceTree = "<group>"; };
+		22905B1E219CAFC000FFEE89 /* RecordRenderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordRenderComponent.swift; sourceTree = "<group>"; };
+		22905B1F219CAFC000FFEE89 /* RecordPhysicsComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPhysicsComponent.swift; sourceTree = "<group>"; };
+		22905B20219CAFC000FFEE89 /* RecordMovementComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMovementComponent.swift; sourceTree = "<group>"; };
+		22905B21219CAFC000FFEE89 /* LayerRenderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerRenderComponent.swift; sourceTree = "<group>"; };
+		22905B27219CB45000FFEE89 /* Node.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Node.storyboard; sourceTree = "<group>"; };
 		2290A03420E2E4BE00F028C4 /* FlippedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlippedCollectionView.swift; sourceTree = "<group>"; };
 		2290A04520E4439C00F028C4 /* NSColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.swift; sourceTree = "<group>"; };
 		22A49872204749700024B46C /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
@@ -135,8 +151,8 @@
 		22F3EBA7215313CB00FCFF6B /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		22F5BFFA216D163F00169387 /* MacGestures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MacGestures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F5C002216D17C700169387 /* MacGestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacGestures.swift; sourceTree = "<group>"; };
-		22FCD419219CAA500010F800 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		22FCD41A219CAA600010F800 /* MainScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
+		22FCD419219CAA500010F800 /* NodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeViewController.swift; sourceTree = "<group>"; };
+		22FCD41A219CAA600010F800 /* NodeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeScene.swift; sourceTree = "<group>"; };
 		22FCD41C219CAA7B0010F800 /* ClusterLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterLayer.swift; sourceTree = "<group>"; };
 		22FCD41D219CAA7B0010F800 /* RecordEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordEntity.swift; sourceTree = "<group>"; };
 		22FCD41E219CAAB80010F800 /* EntityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
@@ -148,7 +164,10 @@
 		22FCD42A219CAAC70010F800 /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
 		22FCD42D219CAAD90010F800 /* RecordNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordNode.swift; sourceTree = "<group>"; };
 		22FCD42E219CAAD90010F800 /* ClusterLayerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterLayerNode.swift; sourceTree = "<group>"; };
+		2E1A5786DFE57863B898D285 /* Pods-NodeExplorer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NodeExplorer.release.xcconfig"; path = "Pods/Target Support Files/Pods-NodeExplorer/Pods-NodeExplorer.release.xcconfig"; sourceTree = "<group>"; };
 		3F2FAB5C204F7D9E002EDF5D /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		4CD4648F988BC8250230E344 /* Pods_NodeExplorer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NodeExplorer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		536B080FEB876C0EC8B8F67A /* Pods-NodeExplorer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NodeExplorer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NodeExplorer/Pods-NodeExplorer.debug.xcconfig"; sourceTree = "<group>"; };
 		7FCD4BC304E6BE947ABB8966 /* Pods_TimelineExplorer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimelineExplorer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F22945520773EA600731E78 /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		8FB48D6C2128E1D7009980B1 /* MapAnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnimationType.swift; sourceTree = "<group>"; };
@@ -170,7 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69F8459B2D7EBA05D5054E24 /* Pods_TimelineExplorer.framework in Frameworks */,
+				39C1E07C9CED5AA7B6C10099 /* Pods_NodeExplorer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,10 +251,10 @@
 		22290C192028FA1E000E0573 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				22FCD418219CAA420010F800 /* NodeViewController */,
 				22290C0E2028F9EC000E0573 /* Main.storyboard */,
 				22A9C609219B4D3D00A2C524 /* BaseViewController */,
 				22A9C5FC219B489F00A2C524 /* RecordViewController */,
+				22FCD418219CAA420010F800 /* NodeViewController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -329,6 +348,17 @@
 			path = Windows;
 			sourceTree = "<group>";
 		};
+		22905B1D219CAFB300FFEE89 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				22905B21219CAFC000FFEE89 /* LayerRenderComponent.swift */,
+				22905B20219CAFC000FFEE89 /* RecordMovementComponent.swift */,
+				22905B1F219CAFC000FFEE89 /* RecordPhysicsComponent.swift */,
+				22905B1E219CAFC000FFEE89 /* RecordRenderComponent.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		2290A03A20E30E4400F028C4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -390,10 +420,12 @@
 		22FCD418219CAA420010F800 /* NodeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				22FCD42C219CAACD0010F800 /* Nodes */,
+				22905B27219CB45000FFEE89 /* Node.storyboard */,
+				22FCD419219CAA500010F800 /* NodeViewController.swift */,
+				22FCD41A219CAA600010F800 /* NodeScene.swift */,
 				22FCD41B219CAA6E0010F800 /* Entities */,
-				22FCD41A219CAA600010F800 /* MainScene.swift */,
-				22FCD419219CAA500010F800 /* MainViewController.swift */,
+				22FCD42C219CAACD0010F800 /* Nodes */,
+				22905B1D219CAFB300FFEE89 /* Components */,
 			);
 			path = NodeViewController;
 			sourceTree = "<group>";
@@ -424,6 +456,7 @@
 				A4DC16D1E47B486A4E08792E /* Pods_All_MapExplorer.framework */,
 				0457AC7458D91763AF1BEE6E /* Pods_MapExplorer.framework */,
 				7FCD4BC304E6BE947ABB8966 /* Pods_TimelineExplorer.framework */,
+				4CD4648F988BC8250230E344 /* Pods_NodeExplorer.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -435,6 +468,8 @@
 				C6C56FC0E77D434B7DF387CE /* Pods-MapExplorer.release.xcconfig */,
 				93ADDE20D566F850E2AB3FCC /* Pods-TimelineExplorer.debug.xcconfig */,
 				A2A951FCC4F096B0AB78BDC9 /* Pods-TimelineExplorer.release.xcconfig */,
+				536B080FEB876C0EC8B8F67A /* Pods-NodeExplorer.debug.xcconfig */,
+				2E1A5786DFE57863B898D285 /* Pods-NodeExplorer.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -533,6 +568,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22A9C612219B4E6E00A2C524 /* RecordCollectionItemView.xib in Resources */,
+				22905B28219CB45000FFEE89 /* Node.storyboard in Resources */,
 				22A9C618219B58DA00A2C524 /* cities.json in Resources */,
 				22290C0D2028F9EC000E0573 /* Assets.xcassets in Resources */,
 				22290C102028F9EC000E0573 /* Main.storyboard in Resources */,
@@ -571,7 +607,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-TimelineExplorer/Pods-TimelineExplorer-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-NodeExplorer/Pods-NodeExplorer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
@@ -590,7 +626,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TimelineExplorer/Pods-TimelineExplorer-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NodeExplorer/Pods-NodeExplorer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8F1D2FAC58B31812451CE63B /* [CP] Check Pods Manifest.lock */ = {
@@ -604,7 +640,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TimelineExplorer-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-NodeExplorer-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -625,6 +661,7 @@
 				22D6F91E20B6836900C7FB5F /* NSApplication.swift in Sources */,
 				22A9C608219B4D1900A2C524 /* RecordViewController.swift in Sources */,
 				226A4524214F342200860F0E /* TouchScreen.swift in Sources */,
+				22905B22219CAFC700FFEE89 /* LayerRenderComponent.swift in Sources */,
 				2290A03520E2E4BE00F028C4 /* FlippedCollectionView.swift in Sources */,
 				22290C3B2028FA35000E0573 /* PacketType.swift in Sources */,
 				225C92B92130CC6D00D629EE /* ImageView.swift in Sources */,
@@ -632,6 +669,7 @@
 				22FCD424219CAAB90010F800 /* EntityState.swift in Sources */,
 				22B1E2AA2045F2EE00BDDF14 /* AVKit.swift in Sources */,
 				22A9C600219B4AC300A2C524 /* WindowManager.swift in Sources */,
+				22905B1A219CAE6900FFEE89 /* RecordNode.swift in Sources */,
 				22667A28214088EF00F15A04 /* DispatchTimer.swift in Sources */,
 				226A451C214F23B500860F0E /* RecordManager.swift in Sources */,
 				22290C3A2028FA35000E0573 /* Int.swift in Sources */,
@@ -645,6 +683,8 @@
 				222694C020699B10007DA6FA /* Record.swift in Sources */,
 				22F5C003216D17C700169387 /* MacGestures.swift in Sources */,
 				22A9C5FB219B489A00A2C524 /* BaseViewController.swift in Sources */,
+				22905B19219CAE6600FFEE89 /* ClusterLayerNode.swift in Sources */,
+				22905B1B219CAE6D00FFEE89 /* NodeScene.swift in Sources */,
 				2276AE68204E75C2001FAD8B /* BorderlessWindow.swift in Sources */,
 				22A9C611219B4E6B00A2C524 /* RecordCollectionItemView.swift in Sources */,
 				22A9C61A219B5BCC00A2C524 /* City.swift in Sources */,
@@ -654,23 +694,29 @@
 				22FCD426219CAAB90010F800 /* RecordStateMachine.swift in Sources */,
 				2213CDCA21766326003C695F /* NSView.swift in Sources */,
 				22290C092028F9EC000E0573 /* AppDelegate.swift in Sources */,
+				22905B25219CAFCF00FFEE89 /* RecordRenderComponent.swift in Sources */,
+				22905B1C219CAE7000FFEE89 /* NodeViewController.swift in Sources */,
 				A44A56EE2135F35200F73D55 /* TimelineSelection.swift in Sources */,
 				22290C392028FA35000E0573 /* CoreGraphics.swift in Sources */,
 				22F3EBA8215313CB00FCFF6B /* Animations.swift in Sources */,
 				22A9C602219B4B0200A2C524 /* WindowType.swift in Sources */,
+				22905B23219CAFCA00FFEE89 /* RecordMovementComponent.swift in Sources */,
 				3F2FAB5D204F7D9E002EDF5D /* Collection.swift in Sources */,
 				22A9C604219B4BDB00A2C524 /* WindowFactory.swift in Sources */,
 				226A451A214F1FA300860F0E /* RecordType.swift in Sources */,
 				22FCD427219CAAB90010F800 /* BitMaskGenerator.swift in Sources */,
+				22905B18219CAE6300FFEE89 /* ClusterLayer.swift in Sources */,
 				2222B13A20D85BD700ECCB5D /* ApplicationType.swift in Sources */,
 				22FCD428219CAAB90010F800 /* NodeCluster.swift in Sources */,
 				22A9C606219B4CE100A2C524 /* RelationshipHelper.swift in Sources */,
 				22A9C614219B4F5600A2C524 /* FadingScrollView.swift in Sources */,
 				22290C3C2028FA35000E0573 /* NetworkConfiguration.swift in Sources */,
 				22290C2E2028FA1F000E0573 /* Style.swift in Sources */,
+				22905B17219CAE5F00FFEE89 /* RecordEntity.swift in Sources */,
 				8F22945620773EA600731E78 /* Math.swift in Sources */,
 				2290A04620E4439C00F028C4 /* NSColor.swift in Sources */,
 				22FCD429219CAAB90010F800 /* AnimationType.swift in Sources */,
+				22905B24219CAFCD00FFEE89 /* RecordPhysicsComponent.swift in Sources */,
 				220AE86120ED48C200F6E9AA /* Months.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -819,7 +865,7 @@
 		};
 		22290C162028F9EC000E0573 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93ADDE20D566F850E2AB3FCC /* Pods-TimelineExplorer.debug.xcconfig */;
+			baseConfigurationReference = 536B080FEB876C0EC8B8F67A /* Pods-NodeExplorer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -842,7 +888,7 @@
 		};
 		22290C172028F9EC000E0573 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2A951FCC4F096B0AB78BDC9 /* Pods-TimelineExplorer.release.xcconfig */;
+			baseConfigurationReference = 2E1A5786DFE57863B898D285 /* Pods-NodeExplorer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
