@@ -37,7 +37,7 @@ class NodeViewController: NSViewController, NodeGestureResponder {
 
         if !initialized {
             initialized = true
-            setupMainScene()
+            setupNodeScene()
         }
     }
 
@@ -49,20 +49,12 @@ class NodeViewController: NSViewController, NodeGestureResponder {
         mainView.showsNodeCount = true
     }
 
-
-    // MARK: Helpers
-
-    private func setupMainScene() {
-        let nodeScene = makeNodeScene()
-        EntityManager.instance.scene = nodeScene
-        nodeScene.gestureManager = gestureManager
-        mainView.presentScene(nodeScene)
-    }
-
-    private func makeNodeScene() -> NodeScene {
-        let nodeScene = NodeScene(size: CGSize(width: mainView.bounds.width, height: mainView.bounds.height))
-        nodeScene.backgroundColor = style.darkBackgroundOpaque
-        nodeScene.scaleMode = .aspectFill
-        return nodeScene
+    private func setupNodeScene() {
+        let scene = NodeScene(size: CGSize(width: mainView.bounds.width, height: mainView.bounds.height))
+        scene.backgroundColor = style.darkBackgroundOpaque
+        scene.scaleMode = .aspectFill
+        EntityManager.instance.scene = scene
+        scene.gestureManager = gestureManager
+        mainView.presentScene(scene)
     }
 }

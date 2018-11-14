@@ -58,8 +58,8 @@ final class RecordManager {
             }
         }
 
-        // Create levels for each record
-        createLevelsForRecords()
+        // Create and store related levels for records
+        storeLevels(for: records)
 
         // Create entities for each record
         for (record, levels) in relatedLevelsForRecord {
@@ -72,23 +72,8 @@ final class RecordManager {
 
     // MARK: Helpers
 
-    /// Returns a set of records from the given ids
-    private func records(for type: RecordType, ids: [Int]) -> Set<Record> {
-        return Set(ids.compactMap { recordsForType[type]?[$0] })
-    }
-
-    private func records(for type: RecordType) -> [Record] {
-        guard let recordsForID = recordsForType[type] else {
-            return []
-        }
-
-        return Array(recordsForID.values)
-    }
-
-    private func createLevelsForRecords() {
-        let allRecords = RecordType.allCases.reduce([]) { $0 + records(for: $1) }
-
-        for record in allRecords {
+    private func storeLevels(for records: [Record]) {
+        for record in records {
             // Populate level 0
             let relatives = Set(record.relatedRecords())
             var levelsForRecord = RelatedLevels()
@@ -113,6 +98,14 @@ final class RecordManager {
             }
             relatedLevelsForRecord[record] = levelsForRecord
         }
+    }
+
+    private func records(for type: RecordType) -> [Record] {
+        guard let recordsForID = recordsForType[type] else {
+            return []
+        }
+
+        return Array(recordsForID.values)
     }
 
     private func levels(_ levels: RelatedLevels, contains record: Record) -> Bool {
