@@ -19,6 +19,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         TouchManager.instance.setupTouchSocket()
         RecordManager.instance.initialize()
+        EntityManager.instance.initialize()
         setupApplication()
     }
 

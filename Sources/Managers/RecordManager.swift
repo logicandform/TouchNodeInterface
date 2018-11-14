@@ -60,13 +60,6 @@ final class RecordManager {
 
         // Create and store related levels for records
         storeLevels(for: records)
-
-        // Create entities for each record
-        for (record, levels) in relatedLevelsForRecord {
-            if let record = RecordManager.instance.recordsForType[record.type]?[record.id] {
-                EntityManager.instance.createEntity(record: record, levels: levels)
-            }
-        }
     }
 
 
