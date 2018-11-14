@@ -1,0 +1,6 @@
+framework module MONode {
+  umbrella header "MONode-umbrella.h"
+
+  export *
+  module * { export * }
+}

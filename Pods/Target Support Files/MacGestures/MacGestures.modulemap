@@ -1,0 +1,6 @@
+framework module MacGestures {
+  umbrella header "MacGestures-umbrella.h"
+
+  export *
+  module * { export * }
+}
